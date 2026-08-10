@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+    tier: web
+spec:
+  replicas: {{ .Values.Deployment.replicas }}
+  selector:
+    matchLabels:
+      name: frontend
+      tier: web
+  template:
+    metadata:
+      label:
+        name: frontend
+        tier: web
+    spec:
+      containers:
+      - name: nginx
+        image: devopsrikanth/frontend:{{ .Values.Deployment.imageversion}}
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: frontend
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+  
+      
+  
