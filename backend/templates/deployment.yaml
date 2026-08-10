@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    name: backend
+    tier: app
+spec:
+  replicas: {{ .Values.Deployment.replicas }}
+  selector:
+    matchLabels:
+      name: backend
+      tier: app
+  template:
+    metadata:
+      labels:
+        name: backend
+        tier: app
+    spec:
+      containers:
+      - name: mysql
+        image: devopsrikanth/backend:{{ .Values.Deployment.imageversion }}
+        envFrom:
+        - configMapRef:
+            name: backend
