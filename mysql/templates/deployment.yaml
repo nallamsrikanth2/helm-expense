@@ -20,5 +20,15 @@ spec:
       containers:
       - name: mysql
         image: devopsrikanth/mysql:{{ .Values.Deployment.imageversion }}
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "ExpenseApp@1"
+        - name: MYSQL_USER
+          value: "expense"
+        - name: MYSQL_PASSWORD
+          value: "ExpenseApp@1"
+        - name: MYSQL_DATABASE
+          value: "transactions"
+
 
 
