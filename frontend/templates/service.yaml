@@ -6,8 +6,8 @@ metadata:
     name: frontend
     tier: web
 spec:
+  type: LoadBalancer
   selector:
-    type: LoadBalancer
     name: nginx
     tier: web
   ports:
